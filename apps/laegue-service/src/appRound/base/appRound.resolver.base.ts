@@ -31,6 +31,7 @@ import { AppMatch } from "../../appMatch/base/AppMatch";
 import { MatchFindManyArgs } from "../../match/base/MatchFindManyArgs";
 import { Match } from "../../match/base/Match";
 import { AppLeague } from "../../appLeague/base/AppLeague";
+import { AppRoundDto } from "../AppRoundDto";
 import { AppRoundService } from "../appRound.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => AppRound)
@@ -222,5 +223,21 @@ export class AppRoundResolverBase {
       return null;
     }
     return result;
+  }
+
+  @graphql.Query(() => [AppRoundDto])
+  async GetAllRoundsInLeague(
+    @graphql.Args()
+    args: string
+  ): Promise<AppRoundDto[]> {
+    return this.service.GetAllRoundsInLeague(args);
+  }
+
+  @graphql.Query(() => String)
+  async GetRoundsInLeague(
+    @graphql.Args()
+    args: string
+  ): Promise<string> {
+    return this.service.GetRoundsInLeague(args);
   }
 }

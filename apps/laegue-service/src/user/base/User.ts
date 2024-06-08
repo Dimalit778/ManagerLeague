@@ -39,17 +39,6 @@ class User {
   email!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  firstName!: string | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
@@ -66,7 +55,7 @@ class User {
   @Field(() => String, {
     nullable: true,
   })
-  lastName!: string | null;
+  name!: string | null;
 
   @ApiProperty({
     required: true,

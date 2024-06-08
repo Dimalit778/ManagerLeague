@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+                 package appUser;
+service AppUserService {
+ rpc createAppUser (AppUserCreateInput) returns (AppUser) {}
+rpc appUsers (findManyParams) returns (stream AppUser) {}
+rpc appUser (AppUserWhereUniqueInput) returns (AppUser) {}
+rpc updateAppUser (AppUserUpdateInput) returns (AppUser) {}
+rpc deleteAppUser (AppUserWhereUniqueInput) returns (AppUser) {}
+rpc findManyAppUser (AppUserWhereUniqueInput) returns (stream League) {}
+rpc updateAppUser (LeagueParams) returns (stream League) {}
+rpc connectAppUser (LeagueParams) returns (League) {}
+rpc disconnectAppUser (LeagueParams) returns (League) {} 
+ }
+message AppUserCreateInput {
+string createdAt = 1;
+string id = 2;
+repeated League leagues = 3;
+string name = 4;
+string profileImage = 5;
+int32 totalPoint = 6;
+string updatedAt = 7;
+};
+message AppUser {
+string createdAt = 1;
+string id = 2;
+repeated League leagues = 3;
+string name = 4;
+string profileImage = 5;
+int32 totalPoint = 6;
+string updatedAt = 7;
+};
+message AppUserWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+repeated League leagues = 3;
+string name = 4;
+string profileImage = 5;
+int32 totalPoint = 6;
+string updatedAt = 7;
+};
+message AppUserUpdateInput {
+string createdAt = 1;
+string id = 2;
+repeated League leagues = 3;
+string name = 4;
+string profileImage = 5;
+int32 totalPoint = 6;
+string updatedAt = 7;
+};
+message findManyParams {
+
+};
+message League {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message LeagueWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message LeagueParams {
+AppUserWhereUniqueInput appUserWhereUniqueInput = 1;
+LeagueWhereUniqueInput leagueWhereUniqueInput = 2;
+};

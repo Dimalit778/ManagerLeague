@@ -27,6 +27,7 @@ import { CreateAppMatchArgs } from "./CreateAppMatchArgs";
 import { UpdateAppMatchArgs } from "./UpdateAppMatchArgs";
 import { DeleteAppMatchArgs } from "./DeleteAppMatchArgs";
 import { AppRound } from "../../appRound/base/AppRound";
+import { AppMatchDto } from "../AppMatchDto";
 import { AppMatchService } from "../appMatch.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => AppMatch)
@@ -178,5 +179,21 @@ export class AppMatchResolverBase {
       return null;
     }
     return result;
+  }
+
+  @graphql.Query(() => [AppMatchDto])
+  async GetAllMatchesInRound(
+    @graphql.Args()
+    args: string
+  ): Promise<AppMatchDto[]> {
+    return this.service.GetAllMatchesInRound(args);
+  }
+
+  @graphql.Query(() => String)
+  async GetMatchesInRound(
+    @graphql.Args()
+    args: string
+  ): Promise<string> {
+    return this.service.GetMatchesInRound(args);
   }
 }

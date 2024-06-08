@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+                 package appMatch;
+service AppMatchService {
+ rpc createAppMatch (AppMatchCreateInput) returns (AppMatch) {}
+rpc appMatches (findManyParams) returns (stream AppMatch) {}
+rpc appMatch (AppMatchWhereUniqueInput) returns (AppMatch) {}
+rpc updateAppMatch (AppMatchUpdateInput) returns (AppMatch) {}
+rpc deleteAppMatch (AppMatchWhereUniqueInput) returns (AppMatch) {} 
+ }
+message AppMatchCreateInput {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message AppMatch {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message AppMatchWhereUniqueInput {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message AppMatchUpdateInput {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message findManyParams {
+
+};

@@ -10,9 +10,8 @@ generator client {
 model User {
   createdAt DateTime @default(now())
   email     String?  @unique
-  firstName String?
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  lastName  String?
+  name      String?
   password  String
   roles     Json
   updatedAt DateTime @updatedAt

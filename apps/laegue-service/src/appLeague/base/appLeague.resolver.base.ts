@@ -30,6 +30,7 @@ import { AppRoundFindManyArgs } from "../../appRound/base/AppRoundFindManyArgs";
 import { AppRound } from "../../appRound/base/AppRound";
 import { RoundFindManyArgs } from "../../round/base/RoundFindManyArgs";
 import { Round } from "../../round/base/Round";
+import { AppUserDto } from "../../appUser/AppUserDto";
 import { AppLeagueService } from "../appLeague.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => AppLeague)
@@ -184,5 +185,21 @@ export class AppLeagueResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.Query(() => [AppUserDto])
+  async GetAllUsersInLeague(
+    @graphql.Args()
+    args: string
+  ): Promise<AppUserDto[]> {
+    return this.service.GetAllUsersInLeague(args);
+  }
+
+  @graphql.Query(() => String)
+  async GetUsersInLeague(
+    @graphql.Args()
+    args: string
+  ): Promise<string> {
+    return this.service.GetUsersInLeague(args);
   }
 }

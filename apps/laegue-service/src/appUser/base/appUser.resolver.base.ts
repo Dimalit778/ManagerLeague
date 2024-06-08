@@ -28,6 +28,7 @@ import { UpdateAppUserArgs } from "./UpdateAppUserArgs";
 import { DeleteAppUserArgs } from "./DeleteAppUserArgs";
 import { LeagueFindManyArgs } from "../../league/base/LeagueFindManyArgs";
 import { League } from "../../league/base/League";
+import { AppUserDto } from "../AppUserDto";
 import { AppUserService } from "../appUser.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => AppUser)
@@ -162,5 +163,21 @@ export class AppUserResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.Query(() => AppUserDto)
+  async GetSpecificUserDetails(
+    @graphql.Args()
+    args: string
+  ): Promise<AppUserDto> {
+    return this.service.GetSpecificUserDetails(args);
+  }
+
+  @graphql.Query(() => String)
+  async GetUserDetails(
+    @graphql.Args()
+    args: string
+  ): Promise<string> {
+    return this.service.GetUserDetails(args);
   }
 }

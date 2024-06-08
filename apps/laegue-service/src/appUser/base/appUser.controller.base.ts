@@ -29,6 +29,7 @@ import { AppUserUpdateInput } from "./AppUserUpdateInput";
 import { LeagueFindManyArgs } from "../../league/base/LeagueFindManyArgs";
 import { League } from "../../league/base/League";
 import { LeagueWhereUniqueInput } from "../../league/base/LeagueWhereUniqueInput";
+import { AppUserDto } from "../AppUserDto";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -299,5 +300,39 @@ export class AppUserControllerBase {
       data,
       select: { id: true },
     });
+  }
+
+  @common.Get("/users/:id/details")
+  @swagger.ApiOkResponse({
+    type: AppUserDto,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetSpecificUserDetails(
+    @common.Body()
+    body: string
+  ): Promise<AppUserDto> {
+    return this.service.GetSpecificUserDetails(body);
+  }
+
+  @common.Get("/:id/get-user-details")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetUserDetails(
+    @common.Body()
+    body: string
+  ): Promise<string> {
+    return this.service.GetUserDetails(body);
   }
 }

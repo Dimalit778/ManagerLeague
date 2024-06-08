@@ -26,6 +26,7 @@ import { AppMatch } from "./AppMatch";
 import { AppMatchFindManyArgs } from "./AppMatchFindManyArgs";
 import { AppMatchWhereUniqueInput } from "./AppMatchWhereUniqueInput";
 import { AppMatchUpdateInput } from "./AppMatchUpdateInput";
+import { AppMatchDto } from "../AppMatchDto";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -251,5 +252,39 @@ export class AppMatchControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.Get("/rounds/:id/matches")
+  @swagger.ApiOkResponse({
+    type: AppMatchDto,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetAllMatchesInRound(
+    @common.Body()
+    body: string
+  ): Promise<AppMatchDto[]> {
+    return this.service.GetAllMatchesInRound(body);
+  }
+
+  @common.Get("/:id/get-matches-in-round")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetMatchesInRound(
+    @common.Body()
+    body: string
+  ): Promise<string> {
+    return this.service.GetMatchesInRound(body);
   }
 }

@@ -18,6 +18,8 @@ import {
   Round as PrismaRound,
 } from "@prisma/client";
 
+import { AppUserDto } from "../../appUser/AppUserDto";
+
 export class AppLeagueServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
@@ -73,5 +75,11 @@ export class AppLeagueServiceBase {
         where: { id: parentId },
       })
       .rounds(args);
+  }
+  async GetAllUsersInLeague(args: string): Promise<AppUserDto[]> {
+    throw new Error("Not implemented");
+  }
+  async GetUsersInLeague(args: string): Promise<string> {
+    throw new Error("Not implemented");
   }
 }

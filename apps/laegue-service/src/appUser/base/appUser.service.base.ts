@@ -15,6 +15,7 @@ import {
   AppUser as PrismaAppUser,
   League as PrismaLeague,
 } from "@prisma/client";
+import { AppUserDto } from "../AppUserDto";
 
 export class AppUserServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -58,5 +59,11 @@ export class AppUserServiceBase {
         where: { id: parentId },
       })
       .leagues(args);
+  }
+  async GetSpecificUserDetails(args: string): Promise<AppUserDto> {
+    throw new Error("Not implemented");
+  }
+  async GetUserDetails(args: string): Promise<string> {
+    throw new Error("Not implemented");
   }
 }

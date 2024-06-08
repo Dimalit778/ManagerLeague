@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+                 package appLeague;
+service AppLeagueService {
+ rpc createAppLeague (AppLeagueCreateInput) returns (AppLeague) {}
+rpc appLeagues (findManyParams) returns (stream AppLeague) {}
+rpc appLeague (AppLeagueWhereUniqueInput) returns (AppLeague) {}
+rpc updateAppLeague (AppLeagueUpdateInput) returns (AppLeague) {}
+rpc deleteAppLeague (AppLeagueWhereUniqueInput) returns (AppLeague) {}
+rpc findManyAppLeague (AppLeagueWhereUniqueInput) returns (stream AppRound) {}
+rpc updateAppLeague (AppRoundParams) returns (stream AppRound) {}
+rpc connectAppLeague (AppRoundParams) returns (AppRound) {}
+rpc disconnectAppLeague (AppRoundParams) returns (AppRound) {}
+rpc findManyAppLeague (AppLeagueWhereUniqueInput) returns (stream Round) {}
+rpc updateAppLeague (RoundParams) returns (stream Round) {}
+rpc connectAppLeague (RoundParams) returns (Round) {}
+rpc disconnectAppLeague (RoundParams) returns (Round) {} 
+ }
+message AppLeagueCreateInput {
+repeated AppRound appRounds = 1;
+string createdAt = 2;
+string id = 3;
+bool isSelected = 4;
+string joinCode = 5;
+string leagueCode = 6;
+string leagueName = 7;
+string members = 8;
+repeated Round rounds = 9;
+string updatedAt = 10;
+};
+message AppLeague {
+repeated AppRound appRounds = 1;
+string createdAt = 2;
+string id = 3;
+bool isSelected = 4;
+string joinCode = 5;
+string leagueCode = 6;
+string leagueName = 7;
+string members = 8;
+repeated Round rounds = 9;
+string updatedAt = 10;
+};
+message AppLeagueWhereUniqueInput {
+repeated AppRound appRounds = 1;
+string createdAt = 2;
+string id = 3;
+bool isSelected = 4;
+string joinCode = 5;
+string leagueCode = 6;
+string leagueName = 7;
+string members = 8;
+repeated Round rounds = 9;
+string updatedAt = 10;
+};
+message AppLeagueUpdateInput {
+repeated AppRound appRounds = 1;
+string createdAt = 2;
+string id = 3;
+bool isSelected = 4;
+string joinCode = 5;
+string leagueCode = 6;
+string leagueName = 7;
+string members = 8;
+repeated Round rounds = 9;
+string updatedAt = 10;
+};
+message findManyParams {
+
+};
+message AppRound {
+string createdAt = 1;
+string id = 2;
+bool isFinished = 3;
+int32 roundNumber = 4;
+string updatedAt = 5;
+};
+message AppRoundWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+bool isFinished = 3;
+int32 roundNumber = 4;
+string updatedAt = 5;
+};
+message AppRoundParams {
+AppLeagueWhereUniqueInput appLeagueWhereUniqueInput = 1;
+AppRoundWhereUniqueInput approundWhereUniqueInput = 2;
+};
+message Round {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message RoundWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message RoundParams {
+AppLeagueWhereUniqueInput appLeagueWhereUniqueInput = 1;
+RoundWhereUniqueInput roundWhereUniqueInput = 2;
+};

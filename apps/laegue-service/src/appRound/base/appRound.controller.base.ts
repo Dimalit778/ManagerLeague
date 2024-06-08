@@ -32,6 +32,7 @@ import { AppMatchWhereUniqueInput } from "../../appMatch/base/AppMatchWhereUniqu
 import { MatchFindManyArgs } from "../../match/base/MatchFindManyArgs";
 import { Match } from "../../match/base/Match";
 import { MatchWhereUniqueInput } from "../../match/base/MatchWhereUniqueInput";
+import { AppRoundDto } from "../AppRoundDto";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -449,5 +450,39 @@ export class AppRoundControllerBase {
       data,
       select: { id: true },
     });
+  }
+
+  @common.Get("/leagues/:id/rounds")
+  @swagger.ApiOkResponse({
+    type: AppRoundDto,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetAllRoundsInLeague(
+    @common.Body()
+    body: string
+  ): Promise<AppRoundDto[]> {
+    return this.service.GetAllRoundsInLeague(body);
+  }
+
+  @common.Get("/:id/get-rounds-in-league")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetRoundsInLeague(
+    @common.Body()
+    body: string
+  ): Promise<string> {
+    return this.service.GetRoundsInLeague(body);
   }
 }

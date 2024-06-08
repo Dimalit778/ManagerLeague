@@ -15,6 +15,7 @@ import {
   AppMatch as PrismaAppMatch,
   AppRound as PrismaAppRound,
 } from "@prisma/client";
+import { AppMatchDto } from "../AppMatchDto";
 
 export class AppMatchServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -55,5 +56,11 @@ export class AppMatchServiceBase {
         where: { id: parentId },
       })
       .appRound();
+  }
+  async GetAllMatchesInRound(args: string): Promise<AppMatchDto[]> {
+    throw new Error("Not implemented");
+  }
+  async GetMatchesInRound(args: string): Promise<string> {
+    throw new Error("Not implemented");
   }
 }

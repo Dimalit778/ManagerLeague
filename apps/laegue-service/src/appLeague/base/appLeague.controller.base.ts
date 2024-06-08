@@ -32,6 +32,7 @@ import { AppRoundWhereUniqueInput } from "../../appRound/base/AppRoundWhereUniqu
 import { RoundFindManyArgs } from "../../round/base/RoundFindManyArgs";
 import { Round } from "../../round/base/Round";
 import { RoundWhereUniqueInput } from "../../round/base/RoundWhereUniqueInput";
+import { AppUserDto } from "../../appUser/AppUserDto";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -415,5 +416,39 @@ export class AppLeagueControllerBase {
       data,
       select: { id: true },
     });
+  }
+
+  @common.Get("/leagues/:id/users")
+  @swagger.ApiOkResponse({
+    type: AppUserDto,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetAllUsersInLeague(
+    @common.Body()
+    body: string
+  ): Promise<AppUserDto[]> {
+    return this.service.GetAllUsersInLeague(body);
+  }
+
+  @common.Get("/:id/get-users-in-league")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetUsersInLeague(
+    @common.Body()
+    body: string
+  ): Promise<string> {
+    return this.service.GetUsersInLeague(body);
   }
 }
