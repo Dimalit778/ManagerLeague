@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+                 package round;
+service RoundService {
+ rpc createRound (RoundCreateInput) returns (Round) {}
+rpc rounds (findManyParams) returns (stream Round) {}
+rpc round (RoundWhereUniqueInput) returns (Round) {}
+rpc updateRound (RoundUpdateInput) returns (Round) {}
+rpc deleteRound (RoundWhereUniqueInput) returns (Round) {} 
+ }
+message RoundCreateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message Round {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message RoundWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message RoundUpdateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message findManyParams {
+
+};

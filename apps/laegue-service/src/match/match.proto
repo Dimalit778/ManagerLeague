@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+                 package match;
+service MatchService {
+ rpc createMatch (MatchCreateInput) returns (Match) {}
+rpc matches (findManyParams) returns (stream Match) {}
+rpc match (MatchWhereUniqueInput) returns (Match) {}
+rpc updateMatch (MatchUpdateInput) returns (Match) {}
+rpc deleteMatch (MatchWhereUniqueInput) returns (Match) {} 
+ }
+message MatchCreateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message Match {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message MatchWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message MatchUpdateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message findManyParams {
+
+};

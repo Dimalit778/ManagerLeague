@@ -1,0 +1,91 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model League {
+  appUser   AppUser? @relation(fields: [appUserId], references: [id])
+  appUserId String?  @db.ObjectId
+  createdAt DateTime @default(now())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt DateTime @updatedAt
+}
+
+model Round {
+  appLeague   AppLeague? @relation(fields: [appLeagueId], references: [id])
+  appLeagueId String?    @db.ObjectId
+  createdAt   DateTime   @default(now())
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt   DateTime   @updatedAt
+}
+
+model Match {
+  appRound   AppRound? @relation(fields: [appRoundId], references: [id])
+  appRoundId String?   @db.ObjectId
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt  DateTime  @updatedAt
+}
+
+model AppUser {
+  createdAt    DateTime @default(now())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  leagues      League[]
+  name         String?
+  profileImage Json?
+  totalPoint   Int?
+  updatedAt    DateTime @updatedAt
+}
+
+model AppLeague {
+  appRounds  AppRound[]
+  createdAt  DateTime   @default(now())
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  isSelected Boolean?
+  joinCode   String?
+  leagueCode String?
+  leagueName String?
+  members    String?
+  rounds     Round[]
+  updatedAt  DateTime   @updatedAt
+}
+
+model AppMatch {
+  appRound    AppRound? @relation(fields: [appRoundId], references: [id])
+  appRoundId  String?   @db.ObjectId
+  awayScore   Int?
+  createdAt   DateTime  @default(now())
+  homeScore   Int?
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  isFinished  Boolean?
+  matchPoints Int?
+  result      String?
+  updatedAt   DateTime  @updatedAt
+}
+
+model AppRound {
+  appLeague   AppLeague? @relation(fields: [appLeagueId], references: [id])
+  appLeagueId String?    @db.ObjectId
+  appMatches  AppMatch[]
+  createdAt   DateTime   @default(now())
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  isFinished  Boolean?
+  matches     Match[]
+  roundNumber Int?
+  updatedAt   DateTime   @updatedAt
+}

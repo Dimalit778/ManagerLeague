@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+                 package league;
+service LeagueService {
+ rpc createLeague (LeagueCreateInput) returns (League) {}
+rpc leagues (findManyParams) returns (stream League) {}
+rpc league (LeagueWhereUniqueInput) returns (League) {}
+rpc updateLeague (LeagueUpdateInput) returns (League) {}
+rpc deleteLeague (LeagueWhereUniqueInput) returns (League) {} 
+ }
+message LeagueCreateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message League {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message LeagueWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message LeagueUpdateInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message findManyParams {
+
+};

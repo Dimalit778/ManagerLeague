@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+                 package appRound;
+service AppRoundService {
+ rpc createAppRound (AppRoundCreateInput) returns (AppRound) {}
+rpc appRounds (findManyParams) returns (stream AppRound) {}
+rpc appRound (AppRoundWhereUniqueInput) returns (AppRound) {}
+rpc updateAppRound (AppRoundUpdateInput) returns (AppRound) {}
+rpc deleteAppRound (AppRoundWhereUniqueInput) returns (AppRound) {}
+rpc findManyAppRound (AppRoundWhereUniqueInput) returns (stream AppMatch) {}
+rpc updateAppRound (AppMatchParams) returns (stream AppMatch) {}
+rpc connectAppRound (AppMatchParams) returns (AppMatch) {}
+rpc disconnectAppRound (AppMatchParams) returns (AppMatch) {}
+rpc findManyAppRound (AppRoundWhereUniqueInput) returns (stream Match) {}
+rpc updateAppRound (MatchParams) returns (stream Match) {}
+rpc connectAppRound (MatchParams) returns (Match) {}
+rpc disconnectAppRound (MatchParams) returns (Match) {} 
+ }
+message AppRoundCreateInput {
+repeated AppMatch appMatches = 1;
+string createdAt = 2;
+string id = 3;
+bool isFinished = 4;
+repeated Match matches = 5;
+int32 roundNumber = 6;
+string updatedAt = 7;
+};
+message AppRound {
+repeated AppMatch appMatches = 1;
+string createdAt = 2;
+string id = 3;
+bool isFinished = 4;
+repeated Match matches = 5;
+int32 roundNumber = 6;
+string updatedAt = 7;
+};
+message AppRoundWhereUniqueInput {
+repeated AppMatch appMatches = 1;
+string createdAt = 2;
+string id = 3;
+bool isFinished = 4;
+repeated Match matches = 5;
+int32 roundNumber = 6;
+string updatedAt = 7;
+};
+message AppRoundUpdateInput {
+repeated AppMatch appMatches = 1;
+string createdAt = 2;
+string id = 3;
+bool isFinished = 4;
+repeated Match matches = 5;
+int32 roundNumber = 6;
+string updatedAt = 7;
+};
+message findManyParams {
+
+};
+message AppMatch {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message AppMatchWhereUniqueInput {
+int32 awayScore = 1;
+string createdAt = 2;
+int32 homeScore = 3;
+string id = 4;
+bool isFinished = 5;
+int32 matchPoints = 6;
+string result = 7;
+string updatedAt = 8;
+};
+message AppMatchParams {
+AppRoundWhereUniqueInput appRoundWhereUniqueInput = 1;
+AppMatchWhereUniqueInput appmatchWhereUniqueInput = 2;
+};
+message Match {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message MatchWhereUniqueInput {
+string createdAt = 1;
+string id = 2;
+string updatedAt = 3;
+};
+message MatchParams {
+AppRoundWhereUniqueInput appRoundWhereUniqueInput = 1;
+MatchWhereUniqueInput matchWhereUniqueInput = 2;
+};
