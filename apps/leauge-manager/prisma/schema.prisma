@@ -18,3 +18,14 @@ model User {
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
+
+model League {
+  createdAt  DateTime @default(now())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  leagueCode String?
+  leagueName String?
+  members    Json?
+  name       String?
+  rounds     Json?
+  updatedAt  DateTime @updatedAt
+}
